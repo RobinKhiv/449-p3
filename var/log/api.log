@@ -1,0 +1,123 @@
+[2022-04-01 19:20:06,810] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:20:40,503] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:30:09,942] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:35:52,168] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:38:35,289] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:38:47,838] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:39:38,591] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:40:00,308] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 19:41:04,847] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:44:02,752] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:44:22,235] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:45:28,669] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:46:57,089] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:47:09,360] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:48:09,737] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:52:30,920] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:54:26,619] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:58:51,210] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 22:59:36,069] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:03:34,681] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:06:08,256] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:39:26,272] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:41:52,675] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:43:02,251] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:52:36,397] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:55:21,232] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-01 23:57:16,964] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 22:26:27,320] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 22:32:05,839] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 22:39:30,812] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:07:03,922] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:08:54,688] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:09:27,367] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:10:17,792] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:12:14,394] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:13:26,255] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:14:21,636] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:16:28,870] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:18:07,824] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:25:32,967] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-03 23:26:58,299] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 18:10:18,314] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:07:36,561] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:27:05,248] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:33:17,624] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:34:26,442] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:44:07,535] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:49:46,138] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-05 23:52:42,150] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:10:31,868] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:13:01,876] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:13:46,241] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:14:55,789] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:15:31,137] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:17:31,695] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 00:19:02,159] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:12:15,497] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:13:28,638] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:14:16,513] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:14:59,216] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:15:45,788] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:16:48,837] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:17:31,226] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:19:02,378] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 01:19:15,123] INFO in root: validate word::amish
+[2022-04-06 01:19:20,281] INFO in root: validate word::amis
+[2022-04-06 01:19:26,620] INFO in root: validate word::amist
+[2022-04-06 11:09:29,317] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 11:24:23,133] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 11:24:39,734] INFO in root: validate word::adad
+[2022-04-06 11:25:03,271] INFO in root: validate word::adade
+[2022-04-06 11:25:13,773] INFO in root: validate word::amish
+[2022-04-06 11:25:22,352] INFO in root: validate word::happy
+[2022-04-06 11:25:40,321] INFO in root: adding word:: 
+[2022-04-06 11:25:50,451] INFO in root: adding word::abcde
+[2022-04-06 11:26:03,010] INFO in root: deleting word::abcde
+[2022-04-06 11:45:02,710] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-06 11:45:30,958] INFO in root: validate word::amish
+[2022-04-06 11:45:37,188] INFO in root: validate word::amishr
+[2022-04-06 11:45:44,494] INFO in root: validate word:: 
+[2022-04-06 11:45:58,958] INFO in root: validate word::tryui
+[2022-04-06 11:46:45,318] INFO in root: adding word::abcde
+[2022-04-06 11:47:30,105] INFO in root: adding word::abcde
+[2022-04-06 11:47:48,033] INFO in root: deleting word::  
+[2022-04-06 11:47:56,171] INFO in root: deleting word::abcde
+[2022-04-06 11:48:21,341] INFO in root: deleting word::abcde
+[2022-04-06 11:48:37,797] INFO in root: adding word::abcdef
+[2022-04-06 11:49:03,535] INFO in root: deleting word::abcdef
+[2022-04-17 23:33:29,665] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-18 15:59:33,217] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-18 16:03:47,739] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-18 16:04:24,066] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-18 16:05:09,389] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-18 16:05:51,459] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-18 16:07:37,732] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 17:30:22,490] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 17:34:00,996] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:35:13,555] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:36:14,539] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:47:52,271] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:48:30,110] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:48:54,608] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:49:18,829] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:49:49,520] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:50:46,000] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:51:17,370] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:52:25,818] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:54:41,488] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:55:19,923] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 19:59:24,563] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 20:02:59,075] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 20:36:51,239] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 20:45:23,185] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 20:45:53,702] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 20:54:40,830] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 20:59:19,403] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:03:30,067] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:04:01,878] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:05:02,526] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:05:29,340] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:06:02,520] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:07:09,839] DEBUG in asyncio: Using proactor: IocpProactor
+[2022-04-22 21:08:49,965] DEBUG in asyncio: Using proactor: IocpProactor
