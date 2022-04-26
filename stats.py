@@ -67,12 +67,13 @@ def update_game_service(win:bool, guesses: int, user_id:int, game_id:int, db: sq
     try:
         cur = db.execute("UPDATE games SET guesses = ?, won = ? WHERE user_id = ? AND game_id = ?;", (guesses,win,user_id,game_id))
         db.commit()
+        return
     except sqlite3.IntegrityError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail={"type": type(e).__name__, "msg": str(e)},
         )
-    return
+    
 
 
 #Posting a win or loss for a particular game, along with a timestamp and number of guesses
@@ -98,8 +99,6 @@ def get_top10users(
         i=i+1
         dicts[i] = row["user_id"]
     return {"Top 10 users by number of wins are": dicts}
-
-# Retrieving the statistics for a user
 
 
 # top 10 users by longest streak
