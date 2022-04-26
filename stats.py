@@ -86,7 +86,7 @@ def post_stats_by_userid(win: bool, guesses: int, user_id: int, game_id: int, db
 
 
 # top 10 users by number of wins
-@app.post("/stats/top10wins")
+@app.get("/stats/top10wins")
 def get_top10users(
          db: sqlite3.Connection = Depends(get_db)
 ):
@@ -99,9 +99,11 @@ def get_top10users(
         dicts[i] = row["user_id"]
     return {"Top 10 users by number of wins are": dicts}
 
+# Retrieving the statistics for a user
+
 
 # top 10 users by longest streak
-@app.post("/stats/top10streaks")
+@app.get("/stats/top10streaks")
 def get_top10streaks(
         db: sqlite3.Connection = Depends(get_db)
 ):
