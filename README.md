@@ -3,12 +3,12 @@
 Directions to create sharded databases.
 
 Option 1:
-  first create the single database supplied by Professor Kenytt Avery
-  by running the python script in ./bin/stats.py
-  then shard that single database into 4 (1 users database and 3 games database)
-  with the python script in ./bin/sharddata.py
+  first create the single database supplied by Professor Kenytt Avery <br/>
+  by running the python script in ./bin/stats.py </br>
+  then shard that single database into 4 (1 users database and 3 games database) </br>
+  with the python script in ./bin/sharddata.py </br>
   
 Option 2:
-  Run the sql dump files to create the databases
-  ./bin/init.sh
+  Run the sql dump files to create the databases </br>
+  ./bin/init.sh</br>
   
