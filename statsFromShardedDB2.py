@@ -114,7 +114,7 @@ def get_top10usersFromShard3(
 @app.get("/stats/top10wins")
 def get_top10users(db1: sqlite3.Connection = Depends(get_shard1), db2: sqlite3.Connection = Depends(get_shard2),
                    db3: sqlite3.Connection = Depends(get_shard3)):
-    logging.info("inside first instance-getting top10wins")
+    logging.info("inside third instance-getting top10wins")
     combined_records = get_top10usersFromShard1(db1) | get_top10usersFromShard2(db2) | get_top10usersFromShard3(db3)
     sorted_dict = sorted(combined_records.items(), key=lambda x: x[1], reverse=True)
     win_list = []
@@ -173,7 +173,7 @@ def get_top10streaks(
         db1: sqlite3.Connection = Depends(get_shard1), db2: sqlite3.Connection = Depends(get_shard2),
         db3: sqlite3.Connection = Depends(get_shard3)
 ):
-    logging.info("inside first instance-getting top10streaks")
+    logging.info("inside third instance-getting top10streaks")
     combined_records = get_top10streaksFromShard1(db1) | get_top10streaksFromShard2(db2) | get_top10streaksFromShard3(
         db3)
     sorted_dict = sorted(combined_records.items(), key=lambda x: x[1], reverse=True)
@@ -189,4 +189,4 @@ def get_top10streaks(
 
 
 if __name__ == "__main__":
-    uvicorn.run("statsFromShardedDB:app", host="0.0.0.0", port=5001, log_level="info")
+    uvicorn.run("statsFromShardedDB2:app", host="0.0.0.0", port=5003, log_level="info")
