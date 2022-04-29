@@ -4,7 +4,6 @@
 # <https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask>.
 #
 
-
 import contextlib
 import logging.config
 import sqlite3
@@ -73,7 +72,57 @@ def update_game_service(win:bool, guesses: int, user_id:int, game_id:int, db: sq
             status_code=status.HTTP_409_CONFLICT,
             detail={"type": type(e).__name__, "msg": str(e)},
         )
-    
+
+
+def get_streaks(user_id: int, db: sqlite3.Connection):
+    try:
+        maxStreak = 0
+        currentStreak = 0
+        cur = db.execute("select * from streaks where user_id = ?", [user_id])
+        query = cur.fetchall()
+        dict = {}
+        for row in query:
+            if maxStreak < int(row[1]):
+                maxStreak = int(row[1])
+            currentStreak = int(row[1])
+        dict.update({"currentStreak": currentStreak, "maxStreak": maxStreak})
+        return dict
+    except sqlite3.IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"type": type(e).__name__, "msg": str(e)},
+        )
+
+
+def get_guesses(user_id:int, db: sqlite3.Connection):
+    try:
+        cur = db.execute("SELECT * from games WHERE user_id = ? ORDER by games.game_id", [user_id])
+        query = cur.fetchall()
+        dict = {}
+        guesses = {}
+        wins = 0
+        loses = 0
+        winPercentage = 0
+        gamesPlayed = 0
+        i = 1
+        for row in query:
+            print(row[0], row[1],row[2],row[3],row[4])
+            if int(row[4]) == 0:
+                loses = loses + 1
+            else:
+                wins = wins + 1
+                guesses[i] = int(row[3])
+                i  = i + 1
+            gamesPlayed = gamesPlayed + 1
+        winPercentage = int(float(wins/gamesPlayed) * 100)
+        guesses.update({"fail": loses})
+        dict.update({"guesses": guesses, "winPercentage": winPercentage,"gamesPlayed": gamesPlayed})
+        return dict
+    except sqlite3.IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"type": type(e).__name__, "msg": str(e)},
+        )
 
 
 #Posting a win or loss for a particular game, along with a timestamp and number of guesses
@@ -114,6 +163,17 @@ def get_top10streaks(
         i=i+1
         dicts[i] = row["user_id"]
     return {"Top 10 users by longest streak are": dicts}
+
+
+#retrieve data for player stats
+@app.get("/stats/{id}")
+def retrieve_stats(id: int, response: Response, db: sqlite3.Connection = Depends(get_db)):
+    results = {}
+    streak = get_streaks(id, db)
+    guesses = get_guesses(id, db)
+    results.update(streak)
+    results.update(guesses)
+    return results
 
 if __name__ == "__main__":
     uvicorn.run("stats:app", host="0.0.0.0", port=8000, log_level="info")
