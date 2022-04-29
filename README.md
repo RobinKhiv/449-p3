@@ -26,7 +26,7 @@ follow below steps:
 4. Uncomment below piece of code from statsFromShardedDB.py,statsFromShardedDB1.py,statsFromShardedDB2.py files to test with traefik
  app = FastAPI(root_path="/api/v1")
  
-4.foreman start-which will start 3 instances of stats service
-5.All the 3 instances can be accessed through below url
+5.foreman start-which will start 3 instances of stats service
+6.All the 3 instances can be accessed through below url
 
 Proxy Url-http://127.0.0.1:9999/api/v1/docs
