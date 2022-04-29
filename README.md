@@ -23,6 +23,9 @@ follow below steps:
 
 ./traefik  --configFile=traefik.toml
 
+4. Uncomment below piece of code from statsFromShardedDB.py,statsFromShardedDB1.py,statsFromShardedDB2.py files to test with traefik
+ app = FastAPI(root_path="/api/v1")
+ 
 4.foreman start-which will start 3 instances of stats service
 5.All the 3 instances can be accessed through below url
 
