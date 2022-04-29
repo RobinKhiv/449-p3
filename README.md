@@ -17,9 +17,8 @@ LoadBalancing Setup
 
 follow below steps:
 1.Install Traefik on machine
-2.Take the below configuration files from the traefikconfig folder of the project and place in the traefik directory
-  traefik.toml
-  routes.toml
+2.Take the (traefik.toml, routes.toml) configuration files from the traefikconfig folder of the project and place in the traefik directory
+ 
 3.Run the below command to start traefik
 
 ./traefik  --configFile=traefik.toml
