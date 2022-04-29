@@ -4,6 +4,7 @@
 # <https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask>.
 #
 
+
 import contextlib
 import logging.config
 import sqlite3
@@ -12,6 +13,7 @@ import uuid
 import uvicorn
 from fastapi import FastAPI, Depends, Response, HTTPException, status
 from pydantic import BaseSettings, BaseModel
+
 
 class Settings(BaseSettings):
     shard1: str
@@ -53,27 +55,20 @@ def get_logger():
 
 
 settings = Settings()
-
 # Uncomment below line to test without traefik
-
 app = FastAPI()
-
 logging.info(app.docs_url)
-
 # Uncomment below line to test with traefik
 # app = FastAPI(root_path="/api/v1")
 
 logging.config.fileConfig(settings.logging_config)
 
-
 def get_user_uuid(id:int, db:sqlite3.Connection):
     try:
         cur = db.execute("SELECT * from users WHERE user_id = ? LIMIT 1;", [int(id)])
         query = cur.fetchall()
-
         for row in query:
             return str(row[2])
-
     except sqlite3.IntegrityError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -90,7 +85,6 @@ def get_top10WinRecords(db: sqlite3.Connection):
 
         for row in rows:
             dicts[row["user_id"]] = row["wins"]
-
 
     except Exception as e:
         raise HTTPException(
@@ -110,7 +104,6 @@ def check_for_game(game: int, id: int, db: sqlite3.Connection):
         cur = db.execute("select exists(SELECT * from games WHERE user_id = ? AND game_id = ? LIMIT 1);", (id, game))
         query = cur.fetchone()[0]
         return query
-
     except sqlite3.IntegrityError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -124,9 +117,9 @@ def get_top10StreakRecords(db: sqlite3.Connection):
         cur = db.execute("select user_id,streak from streaks order by streak desc LIMIT 10")
         rows = cur.fetchall()
         dicts = {}
+
         for row in rows:
             dicts[row["user_id"]] = row["streak"]
-
     except Exception as e:
         raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,
@@ -136,16 +129,26 @@ def get_top10StreakRecords(db: sqlite3.Connection):
 
 
 # get top10 records for streaks from shard1
-def get_top10streaksFromShard(db: sqlite3.Connection):
+def get_top10streaksFromShard(
+        db: sqlite3.Connection
+):
     return get_top10StreakRecords(db)
 
 
-def post_game_service(win:bool, guesses: int, user_id: int, game_id:int, db: sqlite3.Connection):
+# get streak data by id
+def get_streaks(id: int, db: sqlite3.Connection):
     try:
-        cur = db.execute("INSERT into games (user_id, game_id, guesses, won) VALUES (?, ?, ?,?);",(user_id, game_id,guesses,win))
-        db.commit()
-        return
-
+        maxStreak = 0
+        currentStreak = 0
+        cur = db.execute("select * from streaks where user_id = ?", [int(id)])
+        query = cur.fetchall()
+        dict = {}
+        for row in query:
+            if maxStreak < int(row[1]):
+                maxStreak = int(row[1])
+            currentStreak = int(row[1])
+        dict.update({"currentStreak": currentStreak, "maxStreak": maxStreak})
+        return dict
     except sqlite3.IntegrityError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -153,6 +156,61 @@ def post_game_service(win:bool, guesses: int, user_id: int, game_id:int, db: sql
         )
 
 
+#get guesses stats by id
+def get_guesses(user_id:int, db: sqlite3.Connection):
+    try:
+        cur = db.execute("SELECT * from games WHERE user_id = ? ORDER by games.game_id", [user_id])
+        query = cur.fetchall()
+        dict = {}
+        guesses = {}
+        wins = 0
+        loses = 0
+        winPercentage = 0
+        gamesPlayed = 0
+        i = 1
+        for row in query:
+            if int(row[4]) == 0:
+                loses = loses + 1
+            else:
+                wins = wins + 1
+                guesses[i] = int(row[3])
+                i  = i + 1
+            gamesPlayed = gamesPlayed + 1
+        winPercentage = int(float(wins/gamesPlayed) * 100)
+        guesses.update({"fail": loses})
+        dict.update({"guesses": guesses, "winPercentage": winPercentage,"gamesPlayed": gamesPlayed})
+        return dict
+    except sqlite3.IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"type": type(e).__name__, "msg": str(e)},
+        )
+
+
+#function to combine streak with guesses
+def get_stats(user_id: int, db: sqlite3.Connection):
+    results = {}
+    streak = get_streaks(user_id, db)
+    guesses = get_guesses(user_id, db)
+    results.update(streak)
+    results.update(guesses)
+    return results
+
+
+# post game results to db
+def post_game_service(win:bool, guesses: int, user_id: int, game_id:int, db: sqlite3.Connection):
+    try:
+        cur = db.execute("INSERT into games (user_id, game_id, guesses, won) VALUES (?, ?, ?,?);",(user_id, game_id,guesses,win))
+        db.commit()
+        return
+    except sqlite3.IntegrityError as e:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail={"type": type(e).__name__, "msg": str(e)},
+        )
+
+
+#function to decide whether game_id exists or we need to create a new one
 def post_game(game_id:int, user_id:int, win: bool, guesses: int, db: sqlite3.Connection):
     if check_for_game(game_id, user_id, db):
         update_game_service(win, guesses, user_id, game_id, db)
@@ -160,12 +218,12 @@ def post_game(game_id:int, user_id:int, win: bool, guesses: int, db: sqlite3.Con
         post_game_service(win, guesses, user_id, game_id, db)
 
 
+# function to  update an exisiting game result
 def update_game_service(win:bool, guesses: int, user_id:int, game_id:int, db: sqlite3.Connection):
     try:
         cur = db.execute("UPDATE games SET guesses = ?, won = ? WHERE user_id = ? AND game_id = ?;", (guesses,win,user_id,game_id))
         db.commit()
         return
-
     except sqlite3.IntegrityError as e:
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
@@ -195,7 +253,6 @@ gamedb1: sqlite3.Connection = Depends(get_shard1), gamedb2: sqlite3.Connection =
 def get_top10users(db1: sqlite3.Connection = Depends(get_shard1), db2: sqlite3.Connection = Depends(get_shard2),
                    db3: sqlite3.Connection = Depends(get_shard3)):
     logging.info("inside first instance-getting top10wins")
-
     combined_records = {}
     combined_records.update(get_top10usersFromShard(db1))
     combined_records.update(get_top10usersFromShard(db2))
@@ -206,13 +263,12 @@ def get_top10users(db1: sqlite3.Connection = Depends(get_shard1), db2: sqlite3.C
     top10_initial_dict = {}
     top10_final_dict = {}
     top10_initial_dict.update(sorted_dict)
-
     for key, val in top10_initial_dict.items():
         win_list.append([key, val])
-
     for x in range(0, 10):
         top10_final_dict[x] = win_list[x].__getitem__(0)
     return {"Top 10 users by number of wins are": top10_final_dict}
+
 
 
 # get top10 records for streaks from all the sharded databases,combine the records
@@ -227,19 +283,33 @@ def get_top10streaks(
     combined_records.update(get_top10streaksFromShard(db1))
     combined_records.update(get_top10streaksFromShard(db2))
     combined_records.update(get_top10streaksFromShard(db3))
-
     sorted_dict = sorted(combined_records.items(), key=lambda x: x[1], reverse=True)
     streaks_list = []
     top10_initial_dict = {}
     top10_final_dict = {}
     top10_initial_dict.update(sorted_dict)
-
     for key, val in top10_initial_dict.items():
         streaks_list.append([key, val])
-
     for x in range(0, 10):
         top10_final_dict[x] = streaks_list[x].__getitem__(0)
     return {"Top 10 users by longest streak are": top10_final_dict}
+
+
+#retrieve data for player stats
+@app.get("/stats/user")
+def retrieve_stats(user_id: int, response: Response, userdb: sqlite3.Connection = Depends(get_shard4),
+gamedb1: sqlite3.Connection = Depends(get_shard1), gamedb2: sqlite3.Connection = Depends(get_shard2), gamedb3: sqlite3.Connection = Depends(get_shard3)):
+    results = {}
+    uid = get_user_uuid(user_id, userdb)
+    shardID = int(uuid.UUID(uid)) % 3
+
+    if shardID == 0:
+        data = get_stats(user_id, gamedb1)
+    elif shardID == 1:
+        data = get_stats(user_id, gamedb2)
+    else:
+        data = get_stats(user_id, gamedb3)
+    return data;
 
 
 if __name__ == "__main__":
