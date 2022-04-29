@@ -27,6 +27,7 @@ follow below steps:
  app = FastAPI(root_path="/api/v1")
  
 5.foreman start-which will start 3 instances of stats service
+
 6.All the 3 instances can be accessed through below url
 
 Proxy Url-http://127.0.0.1:9999/api/v1/docs
