@@ -99,19 +99,18 @@ def get_guesses(user_id:int, db: sqlite3.Connection):
         cur = db.execute("SELECT * from games WHERE user_id = ? ORDER by games.game_id", [user_id])
         query = cur.fetchall()
         dict = {}
-        guesses = {}
+        guesses = {1:0, 2:0, 3:0, 4:0, 5:0, 6:0}
         wins = 0
         loses = 0
         winPercentage = 0
         gamesPlayed = 0
         i = 1
         for row in query:
-            print(row[0], row[1],row[2],row[3],row[4])
             if int(row[4]) == 0:
                 loses = loses + 1
             else:
                 wins = wins + 1
-                guesses[i] = int(row[3])
+                guesses[int(row[3])] = guesses[int(row[3])] + 1
                 i  = i + 1
             gamesPlayed = gamesPlayed + 1
         winPercentage = int(float(wins/gamesPlayed) * 100)
