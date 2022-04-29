@@ -12,3 +12,5 @@ Option 2:</br>
   Run the sql dump files to create the databases </br>
   ./bin/init.sh</br>
   
+
+Proxy Url-http://127.0.0.1:9999/api/v1/docs
