@@ -166,11 +166,11 @@ def get_top10streaks(
 
 
 #retrieve data for player stats
-@app.get("/stats/{id}")
-def retrieve_stats(id: int, response: Response, db: sqlite3.Connection = Depends(get_db)):
+@app.get("/stats/user")
+def retrieve_stats(user_id: int, response: Response, db: sqlite3.Connection = Depends(get_db)):
     results = {}
-    streak = get_streaks(id, db)
-    guesses = get_guesses(id, db)
+    streak = get_streaks(user_id, db)
+    guesses = get_guesses(user_id, db)
     results.update(streak)
     results.update(guesses)
     return results
